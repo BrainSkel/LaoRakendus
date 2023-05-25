@@ -3,7 +3,7 @@
 
 namespace App\Http\Controllers;
 
-
+use Illuminate\Http\RedirectResponse;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -34,10 +34,16 @@ class ProductController extends Controller
      */
     public function store(Request $request) : RedirectResponse
     {
+        // https://laravel.com/docs/10.x/validation#available-validation-rules
         $validated = $request->validate([
             'name' => 'required|string|max:128',
-            'basePrice'
+            'procurementPrice_cents' => 'integer|gte:0',
+            'description' => 'nullable|string',
         ]);
+        $product = Product::create($validated);
+        $product->save();
+
+        return redirect(route('products.index'));
     }
 
     /**
