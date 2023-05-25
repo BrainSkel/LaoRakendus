@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name', 128);
-            $table->integer('basePrice_cents');
-            $table->integer('duration_minutes');
-            $table->integer('');
-            $table->integer('description');
+            $table->integer('procurementPrice_cents');
+            $table->string('description');
             $table->timestamps();
         });
     }
