@@ -10,6 +10,9 @@ Karl Umberto Kats
 # **PROGRAMMEERIMISE/HAJUSRAKENDUSTE PROJEKT**
 ### **EESMÄRK**
 
+
+## **PÄRAST KLOONIMNIST**
+### **TAASTAB VENDOR KAUSTA**
 ```
 docker run --rm \
     -u "$(id -u):$(id -g)" \
@@ -18,7 +21,10 @@ docker run --rm \
     laravelsail/php82-composer:latest \
     composer install --ignore-platform-reqs
 ```
-
+### **INSTALLIB NODE'I MOODULID**
+```
+npm run dev
+```
 - Saada praktiline kogemus hajussüsteemide ehitamisest XML(SOAP) või Rest veebiteenusel ja sellele klientrakenduse loomise abil ning süvendada meeskonnatööoskust.
 
 - SOAP veebiteenuse puhul eeldatakse WCF tehnoloogia kasutamist. Vanema põlvkonna ASP.NET veebiteenuse loomine on lubatud.
