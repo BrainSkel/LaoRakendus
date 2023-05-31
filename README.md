@@ -25,6 +25,16 @@ docker run --rm \
 ```
 npm run dev
 ```
+
+### **Migrate DB**
+```
+sail artisan migrate
+```
+
+manifest
+```
+sail npm run build
+```
 - Saada praktiline kogemus hajussüsteemide ehitamisest XML(SOAP) või Rest veebiteenusel ja sellele klientrakenduse loomise abil ning süvendada meeskonnatööoskust.
 
 - SOAP veebiteenuse puhul eeldatakse WCF tehnoloogia kasutamist. Vanema põlvkonna ASP.NET veebiteenuse loomine on lubatud.
