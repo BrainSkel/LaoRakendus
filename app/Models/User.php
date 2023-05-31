@@ -27,7 +27,7 @@ class User extends Authenticatable
 
     public function products(): HasMany
     {
-        return $this->hasMany(Chirp::class);
+        return $this->hasMany(products::class);
     }
 
     /**
