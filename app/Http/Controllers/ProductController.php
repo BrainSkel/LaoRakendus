@@ -18,7 +18,7 @@ class ProductController extends Controller
     {
 
         return View("products.index" , [
-            'products' => Product::with('user')->latest()->get(),
+            'products' => Product::all(),
         ]);
         //
     }
@@ -59,17 +59,34 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(Product $product): View
     {
         //
+        // $this->authorize('update', $product);
+
+        return view('products.edit', [
+            'product' => $product,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product) : RedirectResponse
     {
         //
+        // $this->authorize('update', $product);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'procurementPrice_cents' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+
+        ]);
+
+        $product->update($validated);
+
+        return redirect(route('products.index'));
     }
 
     /**

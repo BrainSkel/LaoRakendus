@@ -14,8 +14,8 @@ class Product extends Model
         'procurementPrice_cents',
         'description',
     ];
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 }
