@@ -19,5 +19,24 @@
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Add Product') }}</x-primary-button>
         </form>
+        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+            @foreach ($products as $product)
+            <div class="flex-1">
+                <div>
+                    <div class="ml-2 text-sm text-gray-600">
+                        Name:<span class="text-lg text-gray-800"> {{ $product->name }}</span>
+                        {{-- <small class="ml-2 text-sm text-gray-600">{{ $service->created_at->format('j M Y, g:i a') }}</small> --}}
+                    </div>
+                    <div>
+                    <small class="ml-2 text-sm text-gray-600">Description: {{ $product->description }}.</small>
+                    </div>
+                    <div class="ml-2 text-sm text-gray-600">
+                        Base Price:<span class="text-lg text-gray-800"> {{ $product->procurementPrice_cents}}€</span>
+                    </div>
+                    <p class="ml-2 my-4 text-gray-900">{{ $product->description }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
     </div>
 </x-app-layout>
