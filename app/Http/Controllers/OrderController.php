@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
@@ -13,6 +15,10 @@ class OrderController extends Controller
     public function index()
     {
         //
+        return View("orders.index" , [
+            'orders' => Order::all(),
+            'products' => Product::all(),
+        ]);
     }
 
     /**
@@ -29,6 +35,18 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'productId' => 'required|string|max:128',
+            'amount' => 'integer|gte:0',
+            'invoice' => 'nullable|string',
+            'name' => 'nullable|string',
+            'date' => 'nullable|date',
+
+        ]);
+        $order = Order::create($validated);
+        $order->save();
+
+        return redirect(route('orders.index'));
     }
 
     /**
