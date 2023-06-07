@@ -19,7 +19,7 @@ class Order extends Model
         'date',
     ];
 
-    public function Product(): BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }

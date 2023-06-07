@@ -39,11 +39,19 @@ class OrderController extends Controller
             'productId' => 'required|string|max:128',
             'amount' => 'integer|gte:0',
             'invoice' => 'nullable|string',
-            'name' => 'nullable|string',
+            // 'name' => 'nullable|string',
             'date' => 'nullable|date',
 
         ]);
-        $order = Order::create($validated);
+        $order = new Order;
+        $order->productId = $validated['productId'];
+        // $order->product_id = $validated['product_id'];
+        // $order->product()->associate(Order::find($validated['client']));
+        $order->client()->associate($request->user());
+        $order->amount = $validated['amount'];
+        $order->invoice = $validated['invoice'];
+        // $order->name = $validated['name'];
+        $order->date = $validated['date'];
         $order->save();
 
         return redirect(route('orders.index'));
@@ -60,17 +68,34 @@ class OrderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Order $order)
+    public function edit(Order $order): View
     {
         //
+        $this->authorize('update',$order);
+        return view('order.edit',[
+            'order'=>$order,
+            'products'=>Product::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, Order $order): RedirectResponse
     {
         //
+        $this->authorize('update',$order);
+        $validated = $request->validate([
+            'productId' => 'required|string|max:128',
+            'amount' => 'integer|gte:0',
+            'invoice' => 'nullable|string',
+            'name' => 'nullable|string',
+            'date' => 'nullable|date',
+
+        ]);
+        $order->update($validated);
+
+        return redirect(route('orders.index'));
     }
 
     /**

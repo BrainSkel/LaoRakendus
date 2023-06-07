@@ -11,18 +11,33 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('orders')) {
-            Schema::create('orders', function (Blueprint $table) {
-                $table->id();
-                // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-                $table->string('productId', 128);
-                $table->integer('amount');
-                $table->string('invoice', 128);
-                $table->string('name', 128);
-                $table->datetime('date');
-                $table->timestamps();
-            });
-        }
+        // if (!Schema::hasTable('orders')) {
+        //     Schema::create('orders', function (Blueprint $table) {
+        //         $table->id();
+        //         $table->unsignedBigInteger('user_id')->nullable()
+        //             ->refrences('id')
+        //             ->on('user');
+        //         $table->string('productId', 128);
+        //         $table->integer('amount');
+        //         $table->string('invoice', 128);
+        //         $table->string('name', 128);
+        //         $table->datetime('date');
+        //         $table->timestamps();
+        //     });
+        // }
+
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->string('productId',128);
+            $table->integer('amount');
+            $table->string('invoice',128);
+            // $table->string('name',128);
+            $table->datetime('date');
+            $table->unsignedBigInteger('client_id')
+                    ->references('id')
+                    ->on('users');
+            $table->timestamps();
+        });
     }
 
     /**

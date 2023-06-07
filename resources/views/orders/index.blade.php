@@ -19,8 +19,8 @@
                 <input type="text" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
-                <input type="text" required name="name" value="{{ Auth::user()->name }}" placeholder="{{ Auth::user()->name }}" readonly
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                {{-- <input type="text" required name="name" value="{{ Auth::user()->name }}" placeholder="{{ Auth::user()->name }}" readonly
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
 
                 <input type="date" required name="date" value="{{ old('date') }}" placeholder="{{ __('date') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
@@ -45,7 +45,8 @@
                                 @endunless
                             </div>
 
-                            {{-- <x-dropdown>
+                            @if ($order->client->is(auth()->user()))
+                            <x-dropdown>
                                 <x-slot name="trigger">
                                     <button>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-4 w-4 text-gray-400"
@@ -60,12 +61,13 @@
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
                                 </x-slot>
-                            </x-dropdown> --}}
+                            </x-dropdown>
+                            @endif
                         </div>
 
                         <div>
 
-                            <small class="ml-2 text-sm text-gray-600">Name: {{ $order->name }}</small>
+                            <small class="ml-2 text-sm text-gray-600">Name: {{ $order->client->name }}</small>
                         </div>
                         <div class="ml-2 text-sm text-gray-600">
                             amount:<span class="text-lg text-gray-800">
