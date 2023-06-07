@@ -4,8 +4,8 @@
 
         <form method="POST" action="{{ route('orders.store') }}">
 
-            <select name="productId" required class="js-example-basic-single" style="width:100%;" >
-                <option disabled selected>Vali toode</option>
+            <select name="product" required class="js-example-basic-single" style="width:100%;" >
+                <option disabled selected>Choose a product</option>
                 @foreach($products as $product)
                 <option value="{{ $product->id }}">{{ $product->name }}</option>
                 @endforeach
@@ -34,11 +34,14 @@
             @foreach ($orders as $order)
                 <div class="flex-1">
 
+
+
+
                     <div>
                         <div class="flex justify-between items-center">
                             <div class="ml-2 text-sm text-gray-600">
                                 Id: <span class="text-lg text-gray-800"> {{ $order->id }}</span>
-                                Product Name:<span class="text-lg text-gray-800"> Add product name here somehow</span>
+                                Product Name:<span class="text-lg text-gray-800"> {{$order->product->name}}</span>
                                 {{-- <small class="ml-2 text-sm text-gray-600">{{ $service->created_at->format('j M Y, g:i a') }}</small> --}}
                                 @unless ($order->created_at->eq($order->updated_at))
                                     <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>
@@ -76,6 +79,7 @@
                         {{-- <p class="ml-2 my-4 text-gray-900">{{ $order->description }}</p> --}}
 
                     </div>
+
                 </div>
             @endforeach
         </div>

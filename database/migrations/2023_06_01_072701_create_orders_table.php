@@ -28,7 +28,7 @@ return new class extends Migration
 
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('productId',128);
+            // $table->string('productId',128);
             $table->integer('amount');
             $table->string('invoice',128);
             // $table->string('name',128);
@@ -36,6 +36,9 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id')
                     ->references('id')
                     ->on('users');
+            $table->unsignedBigInteger('product_id')
+                    ->references('id')
+                    ->on('products');
             $table->timestamps();
         });
     }

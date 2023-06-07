@@ -12,7 +12,7 @@ class Order extends Model
 
     protected $fillable = [
         'id',
-        'productId',
+        // 'productId',
         'amount',
         'invoice',
         'name',

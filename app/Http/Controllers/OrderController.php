@@ -48,6 +48,7 @@ class OrderController extends Controller
         // $order->product_id = $validated['product_id'];
         // $order->product()->associate(Order::find($validated['client']));
         $order->client()->associate($request->user());
+        $order->product()->associate($request->product());
         $order->amount = $validated['amount'];
         $order->invoice = $validated['invoice'];
         // $order->name = $validated['name'];
@@ -72,7 +73,7 @@ class OrderController extends Controller
     {
         //
         $this->authorize('update',$order);
-        return view('order.edit',[
+        return view('orders.edit',[
             'order'=>$order,
             'products'=>Product::all(),
         ]);
@@ -86,7 +87,7 @@ class OrderController extends Controller
         //
         $this->authorize('update',$order);
         $validated = $request->validate([
-            'productId' => 'required|string|max:128',
+            // 'productId' => 'required|string|max:128',
             'amount' => 'integer|gte:0',
             'invoice' => 'nullable|string',
             'name' => 'nullable|string',
