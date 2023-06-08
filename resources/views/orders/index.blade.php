@@ -77,6 +77,11 @@
                             Date:<span class="text-lg text-gray-800">
                                 {{ date_create($order->date)->format('Y-m-d') }}</span>
                         </div>
+
+                        <div class="ml-2 text-sm text-gray-600">
+                            Price:<span class="text-lg text-gray-800">
+                                {{ $order->product->procurementPrice_cents * $order->amount}}€</span>
+                        </div>
                         {{-- <p class="ml-2 my-4 text-gray-900">{{ $order->description }}</p> --}}
 
                     </div>
