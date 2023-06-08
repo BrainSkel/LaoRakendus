@@ -36,7 +36,8 @@ class OrderController extends Controller
     {
         //
         $validated = $request->validate([
-            'productId' => 'required|string|max:128',
+            // 'productId' => 'required|string|max:128',
+            'product_id' => 'required|gt:0',
             'amount' => 'integer|gte:0',
             'invoice' => 'nullable|string',
             // 'name' => 'nullable|string',
@@ -44,11 +45,11 @@ class OrderController extends Controller
 
         ]);
         $order = new Order;
-        $order->productId = $validated['productId'];
+        // $order->productId = $validated['productId'];
         // $order->product_id = $validated['product_id'];
-        // $order->product()->associate(Order::find($validated['client']));
+        $order->product()->associate(Product::find($validated['product_id']));
         $order->client()->associate($request->user());
-        $order->product()->associate($request->product());
+        // $order->product()->associate($request->product());
         $order->amount = $validated['amount'];
         $order->invoice = $validated['invoice'];
         // $order->name = $validated['name'];
@@ -88,9 +89,10 @@ class OrderController extends Controller
         $this->authorize('update',$order);
         $validated = $request->validate([
             // 'productId' => 'required|string|max:128',
+            'product_id' => 'required|gt:0',
             'amount' => 'integer|gte:0',
             'invoice' => 'nullable|string',
-            'name' => 'nullable|string',
+            // 'name' => 'nullable|string',
             'date' => 'nullable|date',
 
         ]);
