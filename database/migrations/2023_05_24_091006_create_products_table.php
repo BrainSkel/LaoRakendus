@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name', 128);
-            $table->integer('procurementPrice_cents');
+            $table->unsignedDecimal('procurementPrice_cents');
             $table->string('description');
             $table->timestamps();
         });

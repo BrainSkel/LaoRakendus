@@ -10,7 +10,7 @@
                     <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </label>
             <label class="mt-2 text-gray-400 text-sm">Base Price (cents)
-            <input type="number" name="procurementPrice_cents" value="{{ old('procurementPrice_cents', $product->procurementPrice_cents) }}"
+            <input type="number" step="0.01" name="procurementPrice_cents" value="{{ old('procurementPrice_cents', $product->procurementPrice_cents) }}"
                 placeholder="{{ __('Base price in cents') }}"
                 class="text-gray-900 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('procurementPrice_cents')" class="mt-2" />
