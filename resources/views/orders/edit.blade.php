@@ -3,12 +3,7 @@
         <form method="POST" action="{{ route('orders.update', $order) }}">
             @csrf
             @method('patch')
-            <label class="text-gray-400 text-sm">Product name
-                <input type="text" name="name" value="{{ old('name', $product->name) }}"
-                    placeholder="{{ __('Name the product') }}"
-                    class="text-gray-900 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                    <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            </label>
+            
             <label class="mt-2 text-gray-400 text-sm">Amount
             <input type="number" name="amount" value="{{ old('amount', $order->amount) }}"
                 placeholder="{{ __('Select an amount') }}"
