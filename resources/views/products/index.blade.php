@@ -5,8 +5,8 @@
             <input type="text" name="name" value="{{ old('name') }}" placeholder="{{ __('Name the product') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            <input type="number" name="procurementPrice_cents" value="{{ old('procurementPrice_cents') }}"
-                placeholder="{{ __('Procurement price in cents') }}"
+            <input type="number" step="0.01" name="procurementPrice_cents" value="{{ old('procurementPrice_cents') }}"
+                placeholder="{{ __('Enter the price 0.00') }}"
                 class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
             <x-input-error :messages="$errors->get('procurementPrice_cents')" class="mt-2" />
             <x-input-error :messages="$errors->get('duration_minutes')" class="mt-2" />

@@ -39,7 +39,7 @@ class ProductController extends Controller
         // https://laravel.com/docs/10.x/validation#available-validation-rules
         $validated = $request->validate([
             'name' => 'required|string|max:128',
-            'procurementPrice_cents' => 'integer|gte:0',
+            'procurementPrice_cents' => 'numeric|gte:0',
             'description' => 'nullable|string',
         ]);
         $product = Product::create($validated);

@@ -15,7 +15,7 @@ class Order extends Model
         // 'productId',
         'amount',
         'invoice',
-        'name',
+        // 'name',
         'date',
     ];
 

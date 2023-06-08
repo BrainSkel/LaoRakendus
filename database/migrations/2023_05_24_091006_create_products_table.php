@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             // $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->string('name', 128);
-            $table->integer('procurementPrice_cents');
+            $table->unsignedDecimal('procurementPrice_cents');
             $table->string('description');
             $table->timestamps();
         });
