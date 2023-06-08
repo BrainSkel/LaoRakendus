@@ -2,17 +2,23 @@
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
         <form method="POST" action="{{ route('products.store') }}">
             @csrf
-            <input type="text" name="name" value="{{ old('name') }}" placeholder="{{ __('Name the product') }}"
+            <label for="name">Name
+                <input type="text" name="name" value="{{ old('name') }}" placeholder="{{ __('Name the product') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-            <input type="number" step="0.01" name="procurementPrice_cents" value="{{ old('procurementPrice_cents') }}"
-                placeholder="{{ __('Enter the price 0.00') }}"
-                class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-            <x-input-error :messages="$errors->get('procurementPrice_cents')" class="mt-2" />
-            <x-input-error :messages="$errors->get('duration_minutes')" class="mt-2" />
-            <textarea name="description" placeholder="{{ __('Add a description for the product.') }}"
-                class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('description') }}</textarea>
-            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            </label>
+            <label for="procurementPrice_cents">Price
+                <input type="number" step="0.01" name="procurementPrice_cents" value="{{ old('procurementPrice_cents') }}"
+                    placeholder="{{ __('Enter the price') }}"
+                    class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <x-input-error :messages="$errors->get('procurementPrice_cents')" class="mt-2" />
+            </label>
+            <label for="description">Description
+                <textarea name="description" placeholder="{{ __('Add a description for the product.') }}"
+                    class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('description') }}</textarea>
+                <x-input-error :messages="$errors->get('description')" class="mt-2" />
+
+            </label>
             <x-primary-button class="mt-4">{{ __('Add Product') }}</x-primary-button>
         </form>
         <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
@@ -42,6 +48,7 @@
                                     <x-dropdown-link :href="route('products.edit', $product)">
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
+
                                 </x-slot>
                             </x-dropdown>
                         </div>
