@@ -22,6 +22,7 @@
                         <div class="flex justify-between items-center">
                             <div class="ml-2 text-sm text-gray-600">
                                 Name:<span class="text-lg text-gray-800"> {{ $product->name }}</span>
+
                                 {{-- <small class="ml-2 text-sm text-gray-600">{{ $service->created_at->format('j M Y, g:i a') }}</small> --}}
                                 @unless ($product->created_at->eq($product->updated_at))
                                     <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>

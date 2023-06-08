@@ -69,8 +69,13 @@
                             <small class="ml-2 text-sm text-gray-600">Name: {{ $order->client->name }}</small>
                         </div>
                         <div class="ml-2 text-sm text-gray-600">
-                            amount:<span class="text-lg text-gray-800">
+                            Amount:<span class="text-lg text-gray-800">
                                 {{ $order->amount }}</span>
+                        </div>
+
+                        <div class="ml-2 text-sm text-gray-600">
+                            Date:<span class="text-lg text-gray-800">
+                                {{ date_create($order->date)->format('Y-m-d') }}</span>
                         </div>
                         {{-- <p class="ml-2 my-4 text-gray-900">{{ $order->description }}</p> --}}
 
