@@ -47,6 +47,7 @@ class OrderPolicy
     public function delete(User $user, Order $order): bool
     {
         //
+        return $this->update($user, $order);
     }
 
     /**

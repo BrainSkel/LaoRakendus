@@ -5,6 +5,7 @@ use Carbon\Carbon;
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
 
 
+
         <form method="POST" action="{{ route('orders.store') }}">
 
             <select name="product_id" required class="js-example-basic-single" style="width:100%;" >
@@ -19,14 +20,17 @@ use Carbon\Carbon;
             <input type="number" name="amount" value="{{ old('amount') }}"required
                 placeholder="{{ __('amount') }}"
                 class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                {{-- <input type="text" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
                 <input type="hidden" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
                 {{-- <input type="text" required name="name" value="{{ Auth::user()->name }}" placeholder="{{ Auth::user()->name }}" readonly
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
 
-                <input type="hidden" required name="date"  value="{{ Carbon::now()->addDay(10)->toDateString()}}" placeholder="{{ __('date') }}"
+                <input type="date" disabled name="date" value="{{Carbon::now()->addDay(10)->toDateString()}}" placeholder="{{ __('date') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+
 
             <x-input-error :messages="$errors->get('amount')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Add order') }}</x-primary-button>
