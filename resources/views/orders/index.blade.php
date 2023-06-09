@@ -1,5 +1,10 @@
+<?php
+use Carbon\Carbon;
+?>
+
 <x-app-layout>
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
+
 
 
         <form method="POST" action="{{ route('orders.store') }}">
@@ -16,14 +21,15 @@
             <input type="number" name="amount" value="{{ old('amount') }}"required
                 placeholder="{{ __('amount') }}"
                 class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                <input type="text" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                {{-- <input type="text" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
+                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
 
                 {{-- <input type="text" required name="name" value="{{ Auth::user()->name }}" placeholder="{{ Auth::user()->name }}" readonly
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
 
-                <input type="date" required name="date" value="{{ old('date') }}" placeholder="{{ __('date') }}"
+                <input type="date" disabled name="date" value="{{Carbon::now()->addDay(10)->toDateString()}}" placeholder="{{ __('date') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+
 
             <x-input-error :messages="$errors->get('amount')" class="mt-2" />
             <x-primary-button class="mt-4">{{ __('Add order') }}</x-primary-button>
@@ -59,13 +65,6 @@
                                     <x-dropdown-link :href="route('orders.edit', $order)">
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
-                                    <form method="POST" action="{{ route('orders.destroy', $order) }}">
-                                        @csrf
-                                        @method('delete')
-                                        <x-dropdown-link :href="route('orders.destroy', $order)" onclick="event.preventDefault(); this.closest('form').submit();">
-                                            {{ __('Delete') }}
-                                        </x-dropdown-link>
-                                    </form>
                                 </x-slot>
                             </x-dropdown>
                             @endif
@@ -76,18 +75,8 @@
                             <small class="ml-2 text-sm text-gray-600">Name: {{ $order->client->name }}</small>
                         </div>
                         <div class="ml-2 text-sm text-gray-600">
-                            Amount:<span class="text-lg text-gray-800">
+                            amount:<span class="text-lg text-gray-800">
                                 {{ $order->amount }}</span>
-                        </div>
-
-                        <div class="ml-2 text-sm text-gray-600">
-                            Date:<span class="text-lg text-gray-800">
-                                {{ date_create($order->date)->format('Y-m-d') }}</span>
-                        </div>
-
-                        <div class="ml-2 text-sm text-gray-600">
-                            Price:<span class="text-lg text-gray-800">
-                                {{ $order->product->procurementPrice_cents * $order->amount}}€</span>
                         </div>
                         {{-- <p class="ml-2 my-4 text-gray-900">{{ $order->description }}</p> --}}
 
