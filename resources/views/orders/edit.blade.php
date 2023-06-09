@@ -26,7 +26,7 @@
 
 
             <label class="mt-2 text-gray-400 text-sm">Date
-                <input type="date" name="date" value="{{ old('date', $order->date) }}"
+                <input type="date" name="date" value="{{ old('date', \Carbon\Carbon::createFromTimeString($order->date)->toDateString()) }}"
                     placeholder="{{ __('Select a date') }}"
                     class="text-gray-900 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                 <x-input-error :messages="$errors->get('date')" class="mt-2" />
