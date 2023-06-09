@@ -25,10 +25,7 @@ use Carbon\Carbon;
                 <input type="hidden" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
-                {{-- <input type="text" required name="name" value="{{ Auth::user()->name }}" placeholder="{{ Auth::user()->name }}" readonly
-                class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
-
-                <input type="date" disabled name="date" value="{{Carbon::now()->addDay(10)->toDateString()}}" placeholder="{{ __('date') }}"
+                <input type="date" readonly name="date" value="{{Carbon::now()->addDay(10)->toDateString()}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
 
