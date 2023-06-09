@@ -29,7 +29,7 @@ Route::resource('products', ProductController::class)
     ->middleware(['auth', 'verified']);
 
     Route::resource('orders', OrderController::class)
-    ->only(['index', 'store', 'edit', 'update'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 
