@@ -30,10 +30,10 @@ return new class extends Migration
             $table->id();
             // $table->string('productId',128);
             $table->integer('amount');
-            $table->string('invoice',128);
+            // $table->string('invoice',128);
             // $table->string('name',128);
             $table->datetime('date');
-            $table->string('ordererName');
+            // $table->string('ordererName');
             $table->unsignedBigInteger('client_id')
                     ->references('id')
                     ->on('users');

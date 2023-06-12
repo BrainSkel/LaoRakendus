@@ -7,6 +7,7 @@ use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Buyer;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 
+use App\Models\MyInvoice;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class OrderController extends Controller
             // 'productId' => 'required|string|max:128',
             'product_id' => 'required|gt:0',
             'amount' => 'integer|gte:0',
-            'invoice' => 'nullable|string',
+            // 'invoice' => 'nullable|string',
             // 'name' => 'nullable|string',
             'date' => 'nullable|date',
             // 'ordererName' => 'nullable|string',
@@ -59,10 +60,13 @@ class OrderController extends Controller
         // $order->product()->associate($request->product());
         $order->amount = $validated['amount'];
         // $order->ordererName = $validated['ordererName']
-        $order->invoice = $validated['invoice'];
+        // $order->invoice = $validated['invoice'];
         // $order->name = $validated['name'];
         $order->date = $validated['date'];
         $order->save();
+
+        $invoice = new MyInvoice();
+        $invoice->generateInvoice($order);
 
         return redirect(route('orders.index'));
     }
@@ -73,21 +77,6 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         //
-        $customer = new Buyer([
-            'name'          => $order->client->name,
-            'custom_fields' => [
-                'email' => $order->client->email,
-            ],
-        ]);
-
-        $item = (new InvoiceItem())->title($order->product->name)->pricePerUnit(2);
-
-        $invoice = Invoice::make()
-            ->buyer($customer)
-            ->taxRate(20)
-            ->addItem($item);
-
-        return $invoice->stream();
     }
 
     /**
@@ -114,7 +103,7 @@ class OrderController extends Controller
             // 'productId' => 'required|string|max:128',
             'product_id' => 'required|gt:0',
             'amount' => 'integer|gte:0',
-            'invoice' => 'nullable|string',
+            // 'invoice' => 'nullable|string',
             // 'name' => 'nullable|string',
             'date' => 'nullable|date',
 
@@ -136,6 +125,8 @@ class OrderController extends Controller
 
         return redirect(route('orders.index'));
     }
+
+
 
 
 }
