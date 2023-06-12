@@ -35,6 +35,11 @@ manifest
 ```
 sail npm run build
 ```
+
+laravel invoices https://github.com/LaravelDaily/laravel-invoices
+```
+sail composer require laraveldaily/laravel-invoices:^3.0
+```
 - Saada praktiline kogemus hajussüsteemide ehitamisest XML(SOAP) või Rest veebiteenusel ja sellele klientrakenduse loomise abil ning süvendada meeskonnatööoskust.
 
 - SOAP veebiteenuse puhul eeldatakse WCF tehnoloogia kasutamist. Vanema põlvkonna ASP.NET veebiteenuse loomine on lubatud.
