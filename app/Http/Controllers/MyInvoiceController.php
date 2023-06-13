@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice;
+use App\Models\MyInvoice;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
-class InvoiceController extends Controller
+use LaravelDaily\Invoices\Invoice;
+use LaravelDaily\Invoices\Classes\Buyer;
+use LaravelDaily\Invoices\Classes\Seller;
+use LaravelDaily\Invoices\Classes\InvoiceItem;
+
+class MyInvoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,6 +21,17 @@ class InvoiceController extends Controller
     public function index()
     {
         //
+        return View("myInvoices.index" , [
+            'orders' => Order::all(),
+            'myInvoices' => MyInvoice::all(),
+        ]);
+    }
+
+    public function download($filename)
+    {
+        $pathToFile = storage_path('app/invoices/' . $filename);
+
+        return response()->download($pathToFile);
     }
 
     /**
@@ -28,13 +47,18 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'invoiceName' => 'required|string|max:255',
+            'date' => 'nullable|date',
+        ]);
+
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show(MyInvoice $myInvoice)
     {
         //
     }
@@ -42,7 +66,7 @@ class InvoiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Invoice $invoice)
+    public function edit(MyInvoice $myInvoice)
     {
         //
     }
@@ -50,7 +74,7 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, MyInvoice $myInvoice)
     {
         //
     }
@@ -58,7 +82,7 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(MyInvoice $myInvoice)
     {
         //
     }

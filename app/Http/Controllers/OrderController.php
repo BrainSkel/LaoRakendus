@@ -68,6 +68,12 @@ class OrderController extends Controller
         $invoice = new MyInvoice();
         $invoice->generateInvoice($order);
 
+        $myInvoice = new MyInvoice;
+        $myInvoice->invoiceName = $order->id;
+        $myInvoice->order_id = $order->id;
+
+        $myInvoice->save();
+
         return redirect(route('orders.index'));
     }
 

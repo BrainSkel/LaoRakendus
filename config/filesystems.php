@@ -40,6 +40,7 @@ return [
             'root' => storage_path('app/invoices'),
         ],
 
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

@@ -2,18 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
 use LaravelDaily\Invoices\Invoice;
 use LaravelDaily\Invoices\Classes\Buyer;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MyInvoice extends Model
 {
     use HasFactory;
 
-    // public function show
+    protected $fillable = [
+        'id',
+        'invoiceName',
+        'date',
+    ];
+
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    // public function client(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
 
     public static function generateInvoice(Order $order)
     {
@@ -24,7 +40,7 @@ class MyInvoice extends Model
            ],
        ]);
 
-       $item = (new InvoiceItem())->title($order->product->name)->pricePerUnit(2);
+       $item = (new InvoiceItem())->title($order->product->name)->quantity($order->amount)->pricePerUnit($order->product->procurementPrice_cents);
 
        $invoice = Invoice::make()
            ->buyer($customer)

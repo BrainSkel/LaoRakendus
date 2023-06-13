@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\OrderHistoryController;
-use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\MyInvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/invoices/{filename}', [MyInvoiceController::class, 'download'])->name('invoices.download');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -37,8 +39,7 @@ Route::resource('orders', OrderController::class)
 Route::resource('orderHistories', OrderHistoryController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
-Route::resource('invoices', InvoiceController::class)
-    ->only(['index', 'store', 'edit', 'update', 'destroy'])
+Route::resource('myInvoices', MyInvoiceController::class)
     ->middleware(['auth', 'verified']);
 
 

@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
+        Schema::create('my_invoices', function (Blueprint $table) {
             $table->id();
+            $table->string('invoiceName');
+            $table->unsignedBigInteger('order_id')
+                    ->references('id')
+                    ->on('orders');
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        Schema::dropIfExists('my_invoices');
     }
 };
