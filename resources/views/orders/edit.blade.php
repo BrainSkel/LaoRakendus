@@ -8,6 +8,7 @@
 
             <p>Price: {{$order->product->procurementPrice_cents * $order->amount}} €</p>
 
+            <input type="hidden" name="product_id" value="{{ old('product_id', $order->product_id) }}">
 
             <label class="mt-2 text-gray-400 text-sm">Amount
             <input type="number" name="amount" value="{{ old('amount', $order->amount) }}"
@@ -17,12 +18,12 @@
             </label>
 
 
-            <label class="mt-2 text-gray-400 text-sm">Invoice
+            {{-- <label class="mt-2 text-gray-400 text-sm">Invoice
             <input type="text" name="invoice" value="{{ old('amount', $order->invoice) }}"
                 placeholder="{{ __('Invoice goes here') }}"
                 class="text-gray-900 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">{{ old('description', $order->description) }}</input>
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
-            </label>
+            </label> --}}
 
 
             <label class="mt-2 text-gray-400 text-sm">Date

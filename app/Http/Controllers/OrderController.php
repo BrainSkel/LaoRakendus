@@ -68,11 +68,7 @@ class OrderController extends Controller
         $invoice = new MyInvoice();
         $invoice->generateInvoice($order);
 
-        $myInvoice = new MyInvoice;
-        $myInvoice->invoiceName = $order->id;
-        $myInvoice->order_id = $order->id;
 
-        $myInvoice->save();
 
         return redirect(route('orders.index'));
     }
@@ -106,7 +102,6 @@ class OrderController extends Controller
         //
         $this->authorize('update',$order);
         $validated = $request->validate([
-            // 'productId' => 'required|string|max:128',
             'product_id' => 'required|gt:0',
             'amount' => 'integer|gte:0',
             // 'invoice' => 'nullable|string',

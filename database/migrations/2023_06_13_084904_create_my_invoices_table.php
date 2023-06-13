@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('invoiceName');
             $table->unsignedBigInteger('order_id')
                     ->references('id')
-                    ->on('orders');
+                    ->on('orders')
+                    ->onDelete('cascade');
             $table->timestamps();
         });
     }

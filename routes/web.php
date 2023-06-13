@@ -33,7 +33,6 @@ Route::resource('products', ProductController::class)
     ->middleware(['auth', 'verified']);
 
 Route::resource('orders', OrderController::class)
-    ->only(['index', 'store', 'generateInvoice' ,'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 Route::resource('orderHistories', OrderHistoryController::class)

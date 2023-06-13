@@ -22,7 +22,6 @@ class MyInvoiceController extends Controller
     {
         //
         return View("myInvoices.index" , [
-            'orders' => Order::all(),
             'myInvoices' => MyInvoice::all(),
         ]);
     }

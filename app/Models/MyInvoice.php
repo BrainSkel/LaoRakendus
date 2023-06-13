@@ -31,7 +31,7 @@ class MyInvoice extends Model
     // }
 
 
-    public static function generateInvoice(Order $order)
+    public function generateInvoice(Order $order)
     {
        $customer = new Buyer([
            'name'          => $order->client->name,
@@ -40,6 +40,7 @@ class MyInvoice extends Model
            ],
        ]);
 
+      $this->order()->associate($order);
        $item = (new InvoiceItem())->title($order->product->name)->quantity($order->amount)->pricePerUnit($order->product->procurementPrice_cents);
 
        $invoice = Invoice::make()
@@ -47,13 +48,8 @@ class MyInvoice extends Model
            ->taxRate(20)
            ->addItem($item);
 
-           $invoice->filename($order->id); // Set a custom filename for the invoice
+           $invoice->filename("Hannes&Karl Co InvoiceNR ".$order->id); // Set a custom filename for the invoice
            $invoice->save('invoices'); // Save the invoice to a specific directory
 
-           // Generate the invoice as HTML
-           $html = $invoice->toHtml();
-
-           // Return the HTML or you can also return the file path where the invoice is saved
-           return $html;
    }
 }

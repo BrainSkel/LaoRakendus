@@ -9,25 +9,28 @@ use Carbon\Carbon;
 
         <form method="POST" action="{{ route('orders.store') }}">
 
+            <label for="product_id">Select a product
             <select name="product_id" required class="js-example-basic-single" style="width:100%;" >
                 <option disabled selected>Choose a product</option>
                 @foreach($products as $product)
                 <option value="{{ $product->id }}">{{ $product->name }}</option>
                 @endforeach
            </select>
+        </label>
 
             @csrf
-
+            <label for="amount">Enter the amount
             <input type="number" name="amount" value="{{ old('amount') }}"required
                 placeholder="{{ __('amount') }}"
                 class="mt-2 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+            </label>
                 {{-- <input type="text" required name="invoice" value="placeholderInvoice" placeholder="{{ __('invoice') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
                 {{-- <input type="hidden" required name="invoice" value="{{ App\Models\Order::generateInvoice(Auth::user()->name, Auth::user()->email) }}" placeholder="{{ __('invoice') }}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"> --}}
 
 
-                <input type="date" readonly name="date" value="{{Carbon::now()->addDay(10)->toDateString()}}"
+                <input type="hidden" readonly name="date" value="{{Carbon::now()->addDay(10)->toDateString()}}"
                 class="block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
 
 
@@ -64,8 +67,17 @@ use Carbon\Carbon;
                                     <x-dropdown-link :href="route('orders.edit', $order)">
                                         {{ __('Edit') }}
                                     </x-dropdown-link>
+                                    <form method="POST" action="{{ route('orders.destroy', $order) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <x-dropdown-link :href="route('orders.destroy', $order)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                            {{ __('Delete') }}
+                                        </x-dropdown-link>
+                                    </form>
                                 </x-slot>
+
                             </x-dropdown>
+
                             @endif
                         </div>
 
