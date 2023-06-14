@@ -64,9 +64,9 @@ use Carbon\Carbon;
                                     </button>
                                 </x-slot>
                                 <x-slot name="content">
-                                    <x-dropdown-link :href="route('orders.edit', $order)">
+                                    {{-- <x-dropdown-link :href="route('orders.edit', $order)">
                                         {{ __('Edit') }}
-                                    </x-dropdown-link>
+                                    </x-dropdown-link> --}}
                                     <form method="POST" action="{{ route('orders.destroy', $order) }}">
                                         @csrf
                                         @method('delete')
