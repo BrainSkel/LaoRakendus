@@ -8,15 +8,15 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 
 <x-app-layout>
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y">
+        <div class="mt-6 bg-white shadow-sm rounded-lg divide-y my-5">
             @foreach ($myInvoices as $invoice)
-                <div class="flex-1">
+                <div class="flex-1 gap-y-10 my-5">
                     <div>
-                        @if ($invoice->order->client->is(auth()->user()))
-                        <div class="ml-2 text-sm text-gray-600">
+                        @if ($invoice->client->is(auth()->user()))
+                        <div class="ml-2 text-sm text-gray-600 my-5" >
                             Product Name:
                             <span class="text-lg text-gray-800">
-                                {{ $invoice->order->product->name }}
+                                {{ $invoice->invoiceProductName }}
                             </span>
 
 
@@ -26,7 +26,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
                             </span> --}}
 
                         </div>
-                        <div class="ml-2 text-sm text-gray-600">
+                        {{-- <div class="ml-2 text-sm text-gray-600">
                             Product Price:
                             <span class="text-lg text-gray-800">
                                 {{ $invoice->order->product->procurementPrice_cents * $invoice->order->amount }}
@@ -42,12 +42,12 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
                             Product description:
                             <span class="text-lg text-gray-800">
                                 {{ $invoice->order->product->description }}
-                            </span>
-                        </div>
+                            </span> --}}
+                        {{-- </div> --}}
                         <div class="ml-2 text-sm text-gray-600">
                             Product invoice:
-                            <span class="text-lg text-gray-800">
-                                <a href="{{ route('invoices.download', ['filename' => $invoice->invoiceName . '.pdf']) }}">Download Invoice</a>
+                            <span class="text-lg text-gray-800 underline border">
+                                <a href="{{ route('invoices.download', ['filename' => "Hannes&Karl Co InvoiceNR ". $invoice->invoiceName . '.pdf']) }}">Download Invoice</a>
 
                             </span>
                         </div>

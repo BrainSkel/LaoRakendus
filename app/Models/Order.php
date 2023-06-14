@@ -30,10 +30,10 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    protected static function booted () {
-        static::deleting(function(Order $order) { // before delete() method call this
-             $order->photos()->delete();
-             // do the rest of the cleanup...
-        });
-    }
+    // protected static function booted () {
+    //     static::deleting(function(Order $order) { // before delete() method call this
+    //          $order->photos()->delete();
+    //          // do the rest of the cleanup...
+    //     });
+    // }
 }

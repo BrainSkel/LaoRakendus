@@ -51,6 +51,8 @@ class MyInvoiceController extends Controller
             'date' => 'nullable|date',
         ]);
 
+        $order->client()->associate($request->user());
+
 
     }
 

@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('my_invoices', function (Blueprint $table) {
             $table->id();
+            $table->string('invoiceProductName');
             $table->string('invoiceName');
-            $table->unsignedBigInteger('order_id')
+            $table->unsignedBigInteger('client_id')
                     ->references('id')
-                    ->on('orders')
+                    ->on('users')
                     ->onDelete('cascade');
             $table->timestamps();
         });

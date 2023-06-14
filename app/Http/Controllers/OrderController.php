@@ -65,8 +65,20 @@ class OrderController extends Controller
         $order->date = $validated['date'];
         $order->save();
 
+
+        // genereerib invoice orderi pohjal
         $invoice = new MyInvoice();
         $invoice->generateInvoice($order);
+
+
+        // teeb invoices tabelisse uue invoice rea
+        $myInvoice = new MyInvoice;
+        $myInvoice->client()->associate($request->user());
+        $myInvoice->invoiceName = $order->id;
+        // $myInvoice->order_id = $order->id;
+        $myInvoice->invoiceProductName = $order->product->name;
+
+        $myInvoice->save();
 
 
 

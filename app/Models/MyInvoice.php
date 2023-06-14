@@ -17,13 +17,15 @@ class MyInvoice extends Model
     protected $fillable = [
         'id',
         'invoiceName',
+        'invoiceProductName',
         'date',
     ];
 
-    public function order(): BelongsTo
+    public function client(): BelongsTo
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(User::class);
     }
+
 
     // public function client(): BelongsTo
     // {
@@ -40,7 +42,7 @@ class MyInvoice extends Model
            ],
        ]);
 
-      $this->order()->associate($order);
+    //   $this->order()->associate($order);
        $item = (new InvoiceItem())->title($order->product->name)->quantity($order->amount)->pricePerUnit($order->product->procurementPrice_cents);
 
        $invoice = Invoice::make()
